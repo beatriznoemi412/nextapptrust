@@ -1,4 +1,4 @@
-import { ColorMode, color, extendTheme } from "@chakra-ui/react/dist";
+import { ColorMode, color, extendTheme } from "@chakra-ui/react";
 import {  MultiSelectTheme } from "chakra-multiselect";
 
 const activeLabelStyles = {
@@ -51,7 +51,7 @@ const customTheme = extendTheme(
             border: '3px solid red'
           },
         },
-      //  MultiSelect: MultiSelectTheme,
+       MultiSelect: MultiSelectTheme,
         Form: {
           variants: {
             floating: {

@@ -25,7 +25,7 @@ export default function RootLayout({
 import customTheme from "@/app/theme/theme";
 import "./globals.css";
 import { NextAuthProvider } from "./provider";
-import { ChakraProvider } from "@chakra-ui/react/dist";
+import { ChakraProvider } from "@chakra-ui/react";
 //import { QueryClient, QueryClientProvider } from 'react-query'
 //import { ReactQueryDevtools } from 'react-query/devtools'
 
