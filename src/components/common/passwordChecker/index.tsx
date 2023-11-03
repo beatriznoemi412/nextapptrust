@@ -1,22 +1,23 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./PasswordStrengthChecker.scss"; // Estilos CSS en un archivo separado
 import {
   Accordion,
   AccordionButton,
+  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box,
   HStack,
-
+  List,
   ListItem,
   Stack,
-  
+  Text,
   UnorderedList,
   InputGroup,
   Input,
   InputRightElement,
   Button,
-} from "@chakra-ui/react/dist";
+} from "@chakra-ui/react";
 import { InfoIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const PasswordStrengthChecker = ({
