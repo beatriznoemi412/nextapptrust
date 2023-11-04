@@ -7,11 +7,11 @@ import { Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/navigation";
 import { createRef, useState } from "react";
 import { userRegisterFormValidation } from "@/validations";
-import ReCAPTCHA from "react-google-recaptcha";
+//import ReCAPTCHA from "react-google-recaptcha";
 import { Button, Link, Stack, Text, useToast } from "@chakra-ui/react";
 import PasswordStrength from "@/components/common/passwordStrenght";
 
-const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+const recaptchaSiteKey = process.env.localCAPTCHA_KEY;
 
 interface Props {
   email?: string | null;
@@ -22,11 +22,11 @@ export const RegisterForm = ({email}:Props) => {
   const [captchaValue, setCaptchaValue] = useState<string | null>();
   const toast = useToast();
   const router = useRouter();
-  const captchaRef = createRef<ReCAPTCHA>();
+ /*const captchaRef = createRef<ReCAPTCHA>();
   const onChangeCaptcha = (value: any) => {
     console.log("Captcha value:", value);
     setCaptchaValue(value);
-  };
+  };*/
   const onSubmit = async (
     values: { email: string; password: string, confirm_password: string },
     actions: FormikHelpers<{ email: string; password: string, confirm_password: string }>
@@ -38,7 +38,7 @@ export const RegisterForm = ({email}:Props) => {
           name: values.email,
           email: values.email,
           password: values.password,
-          captcha: captchaValue,
+          //captcha: captchaValue,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -61,11 +61,11 @@ export const RegisterForm = ({email}:Props) => {
         isClosable: true,
       });
       console.error("Error en la solicitud:", error);
-      captchaRef.current?.reset();
-      onChangeCaptcha(null)
+    //  captchaRef.current?.reset();
+    /*  onChangeCaptcha(null)
       setLoading(false);
       actions.resetForm();
-      actions.setSubmitting(false);
+      actions.setSubmitting(false);*/
     }
   };
 
@@ -100,13 +100,14 @@ export const RegisterForm = ({email}:Props) => {
               label="Confirmar password"
             />
             <PasswordStrength value={props.values.password} />
-            <ReCAPTCHA  ref={captchaRef} sitekey={recaptchaSiteKey!} onChange={onChangeCaptcha} />
+          {/*} <ReCAPTCHA  ref={captchaRef} sitekey={recaptchaSiteKey!} onChange={onChangeCaptcha} />*/}
             <Button
               mt={4}
               isLoading={props.isSubmitting}
               type="submit"
               w="100%"
-              isDisabled={loading || captchaValue == null}
+              isDisabled={loading}
+             // isDisabled={loading || captchaValue == null}
             >
               Registrarse
             </Button>
