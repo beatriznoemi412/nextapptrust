@@ -1,3 +1,4 @@
+"use client"
 import { ColorMode, color, extendTheme } from "@chakra-ui/react";
 import {  MultiSelectTheme } from "chakra-multiselect";
 

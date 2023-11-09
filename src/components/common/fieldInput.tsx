@@ -1,6 +1,6 @@
 import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react'
 import { Field } from 'formik'
-import React from 'react'
+
 
 interface Props {
   name: string;

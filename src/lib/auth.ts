@@ -50,11 +50,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Credenciales o email inválido.");
         }
 
-        // Verificar si el correo electrónico del usuario está confirmado
-        // DESHABILITADO PARA TESTING
-        // if (!user.emailConfirmed) {
-        //   throw new Error("El correo electrónico no ha sido confirmado.");
-        // }
+       
 
         return {
           id: user.id,

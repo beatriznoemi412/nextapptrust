@@ -1,11 +1,18 @@
+
+/*
+const nextConfig = {
+  experimental: {
+    externalDir: true,
+ },
+}
+module.exports = nextConfig;*/
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  
-    experimental: {
-     
-      serverComponentsExternalPackages: ["@prisma/client", "bcryptjs"]
-      
-    },
-  };
-  
-  module.exports = nextConfig;
+  experimental: {
+    
+    typedRoutes: true,
+  },
+}
+ 
+module.exports = nextConfig
