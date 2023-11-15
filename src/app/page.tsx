@@ -1,19 +1,18 @@
-'use client'
-import Header from "@/components/common/header";
+
+import Header from "@/components/common/Header/header";
 import { colors } from "@/app/theme/colors";
-//import { Metadata } from "next";
-//import { METADATA } from "./metadata";
-import { useRouter } from 'next/navigation';
-import { NextPage } from "next";
+import { Metadata } from "next";
+import { METADATA } from "./metadata";
 
-//export const metadata: Metadata = METADATA;
 
-const Home: NextPage = () => {
-  const router = useRouter();
+export const metadata: Metadata = METADATA;
+
+export default async function Home() {
+
 
   return (
     <>
-      <Header router={router} />
+      <Header/>
       <section style={{ background: colors.primary, minHeight: 'calc(100vh - 72px)' }} className="p-5">
         <div className="max-w-4xl mb-5 mx-auto bg-ct-dark-100 rounded-md py-5 px-8 justify-center items-center">
           <h1 className="text-xl mb-10 font-semibold">
@@ -38,4 +37,3 @@ const Home: NextPage = () => {
     </>
   );
 }
-export default Home;

@@ -1,21 +1,17 @@
 
 import PageContainer from "@/components/common/pageContainer";
 import { LoginForm } from "./form";
-import Header from "@/components/common/header";
+import Header from "@/components/common/Header/header";
 import PageTitle from "@/components/common/pageTitle";
 import { Metadata } from "next";
 import { METADATA } from "../metadata";
-import { useRouter } from 'next/navigation';
-import { NextPage } from "next";
 
 export const metadata: Metadata =  METADATA;
 
-
-  const LoginPage: NextPage = () => {
-    const router = useRouter();
+export default function LoginPage() {
   return (
     <>
-      <Header router={router} />
+      <Header />
       <PageContainer>
         <PageTitle title="Iniciar Sesión"/>
         <LoginForm />
@@ -23,4 +19,3 @@ export const metadata: Metadata =  METADATA;
     </>
   );
 }
-export default LoginPage;

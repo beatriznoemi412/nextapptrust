@@ -7,11 +7,8 @@ import { Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { userRegisterFormValidation } from "@/validations";
-
 import { Button, Link, Stack, Text, useToast } from "@chakra-ui/react";
 import PasswordStrength from "@/components/common/passwordStrenght";
-
-
 
 interface Props {
   email?: string | null;

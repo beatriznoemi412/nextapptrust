@@ -1,35 +1,26 @@
 'use client'
 
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { Button, HStack, Hide, Menu, MenuButton, MenuItem, MenuList, Show, Text } from "@chakra-ui/react";
-
+import { Button, HStack, Image, Hide, Menu, MenuButton, MenuItem, MenuList, Show, Text } from "@chakra-ui/react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import Logo from "../logo";
 import { useRouter } from 'next/navigation';
 
-interface HeaderProps {
-  router: ReturnType<typeof useRouter>;
-}
-
-const Header: React.FC<HeaderProps> = () => {
-  const router = useRouter();
-
+const Header = () => {
   const { data: session } = useSession();
   const user = session?.user;
-
-
+  const router = useRouter();
   return (
-    <div>
+    
         <header className="bg-white  sm:px-4 sm:py-4 shadow-md">
         <nav className="flex justify-between container items-center">
 
          <Link href="/" className="text-ct-dark-600 sm:text-xl md:text-2xl font-semibold">
             <HStack>
-              <Logo altText="Logo" />
+            <Image src={"./images/logo.png"} boxSize={'40px'} alt="Logo" />
               <Text>Trust</Text>
             </HStack>
-          </Link>
+  </Link>
 
           <Show above='md'>
             <ul className="flex items-center gap-4">
@@ -60,11 +51,6 @@ const Header: React.FC<HeaderProps> = () => {
                       Inicio
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/profile" className="text-ct-dark-600">
-                      Perfil
-                    </Link>
-                  </li>
                   <li className="cursor-pointer" onClick={() => signOut()}>
                     Desconectar
                   </li>
@@ -84,14 +70,14 @@ const Header: React.FC<HeaderProps> = () => {
                   <MenuItem onClick={() => router.push('/login')}>Login</MenuItem>
                   <MenuItem onClick={() => router.push('/register')}>Registrate</MenuItem></>)}
                 {user && (<>
-                  <MenuItem onClick={() => router.push('/profile')}>Perfil</MenuItem>
+                {/*  <MenuItem onClick={() => router.push('/profile')}>Perfil</MenuItem>*/}
                   <MenuItem onClick={() => signOut()}>Desconectar</MenuItem></>)}
               </MenuList>
             </Menu>
           </Hide>
         </nav>
       </header>
-    </div>
+  
   );
 };
 
