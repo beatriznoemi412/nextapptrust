@@ -8,17 +8,15 @@ import { METADATA } from "../metadata";
 export const metadata: Metadata = METADATA;
 
 export default async function ResetPasswordPage({ searchParams }: any) {
- 
-  const { verificationRequest } = searchParams;
-
-  // Ensure that verificationRequest is an object with necessary properties
-  if (
+    const { verificationRequest } = searchParams;
+  
+    if (
     verificationRequest &&
     verificationRequest.userId &&
     new Date() < verificationRequest.expires
   ) {
     try {
-      // Assuming verificationRequest is an object, you might want to validate its structure
+
       const user = await prisma.user.findFirst({
         where: {
           id: verificationRequest.userId,
@@ -26,9 +24,9 @@ export default async function ResetPasswordPage({ searchParams }: any) {
       });
 
       if (!user) {
-        // Handle the case where user is null
+
         console.error("User data is null.");
-        // You might want to redirect, display an error message, or handle it in some way
+
         return (
           <>
             <Header />
@@ -37,9 +35,6 @@ export default async function ResetPasswordPage({ searchParams }: any) {
         );
       }
 
-      
-
-      // Render the component with the user data
       return (
         <>
           <Header />
@@ -51,18 +46,16 @@ export default async function ResetPasswordPage({ searchParams }: any) {
       // Handle the error, redirect, or display an error message as needed
       return (
         <>
-          <Header  />
+          <Header />
           <p>Error fetching user data. Please try again.</p>
         </>
       );
     }
   }
-
-  // Render the component without user data or handle the case where the parameters are not valid
   return (
     <>
       <Header />
-     
+
       <p>Verification parameters are not valid.</p>
     </>
   );

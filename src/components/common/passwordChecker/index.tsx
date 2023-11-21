@@ -4,15 +4,12 @@ import "./PasswordStrengthChecker.scss"; // Estilos CSS en un archivo separado
 import {
   Accordion,
   AccordionButton,
-  
   AccordionItem,
   AccordionPanel,
   Box,
   HStack,
-  
   ListItem,
   Stack,
-
   UnorderedList,
   InputGroup,
   Input,

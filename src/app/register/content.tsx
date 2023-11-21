@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import PageContainer from "@/components/common/pageContainer";
 import { RegisterForm } from "./form"

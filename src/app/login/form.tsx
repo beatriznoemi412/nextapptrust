@@ -1,8 +1,7 @@
 "use client"
 
 import { signIn } from "next-auth/react";
-import { useSearchParams} from "next/navigation";
-import {useRouter} from "next/navigation";
+import { useSearchParams, useRouter} from "next/navigation";
 import { useState } from "react";
 import { Formik, FormikHelpers } from "formik";
 import { Button, Link, Stack, Text, useToast } from "@chakra-ui/react";
@@ -43,7 +42,7 @@ export const LoginForm = () => {
         title: "Error",
         description: error.message,
         status: 'error',
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
       })
       setLoading(false);

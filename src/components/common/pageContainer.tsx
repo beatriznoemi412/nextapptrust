@@ -1,3 +1,4 @@
+"use client"
 
 import { ReactNode } from "react";
 import {
@@ -5,6 +6,8 @@ import {
   Container,
   VStack,
 } from "@chakra-ui/react";
+
+
 interface PageContainerProps extends FlexProps {
   children?: ReactNode;
   maxW?: string;

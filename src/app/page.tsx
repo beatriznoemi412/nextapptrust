@@ -8,8 +8,6 @@ import { METADATA } from "./metadata";
 export const metadata: Metadata = METADATA;
 
 export default async function Home() {
-
-
   return (
     <>
       <Header/>

@@ -1,47 +1,62 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcryptjs';
+import { prisma } from "@/lib/prisma";
+import { hash } from "bcryptjs";
+import { NextResponse } from "next/server";
 
-interface ErrorResponse {
-  error: string;
-}
+const checkValidEmailString = (email: string) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-  
-  console.log('Método de la solicitud:', req.method);
-  if (req.method === 'POST') {
-    const { email, password } = req.body;
+export async function POST(req: Request) {
+  try {
+    const { email, password} = (await req.json()) as {
+     
+      email: string;
+      password: string;
+     
+    };
 
-    try {
-      // Validación básica de contraseña
-      if (!password) {
-        throw new Error('La contraseña es obligatoria.');
-      }
-      console.log('Valor de password:', password);
-       // Hash de la contraseña utilizando bcrypt
-       const saltRounds = 10;
-       const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-      // Crear el usuario en la base de datos
-      const user = await prisma.user.create({
-        data: {
-          email,
-          password: hashedPassword,
-        },
-      });
-
-      res.status(200).json({ message: 'Usuario registrado con éxito', user });
-    } catch (error: any) {
-      const errorMessage: string = error instanceof Error ? error.message : 'Error desconocido';
-      const responseError: ErrorResponse = { error: errorMessage };
-
-      res.status(500).json(responseError);
+    if (!email || !password ) {
+      throw new Error("Por favor, complete todos los campos.");
     }
-  } else {
-    res.status(405).json({ message: 'Método no permitido' });
+
+    if (password.length < 8) {
+      throw new Error("La contraseña debe tener al menos 8 caracteres.");
+    }
+
+    if (!checkValidEmailString(email)) {
+      throw new Error("El correo electrónico no es válido.");
+    }
+
+    const hashed_password = await hash(password, 12);
+
+   
+    const newUser = await prisma.user.create({
+      data: {
+      
+        email: email.toLowerCase(),
+        password: hashed_password,
+      },
+    });
+
+    
+    return NextResponse.json({
+      user: {
+        email: newUser.email,
+      },
+    });
+  } catch (error: any) {
+    let message = error.message;
+    if (error.code === "P2002") {
+      message = "El correo electrónico ya está registrado";
+    }
+    return new NextResponse(
+      JSON.stringify({
+        status: "error",
+        message: message,
+      }),
+      { status: 500 }
+    );
   }
 }
+
